@@ -22,6 +22,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  console.log("Test");
+
   return (
     <html lang="en" className="light">
       <body
