@@ -5,7 +5,7 @@ import {
   Button,
   buttonSizeOptions,
   buttonVariantOptions,
-} from "@/components/Button";
+} from "@/components/ui/Button";
 import { Plus } from "lucide-react";
 
 const meta = {
