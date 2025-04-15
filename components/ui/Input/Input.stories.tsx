@@ -4,6 +4,7 @@ import { fn } from "@storybook/test";
 import { Input } from "@/components/ui/Input";
 import { Label } from "@/components/ui/Label";
 import { SearchIcon } from "lucide-react";
+import { Caption } from "@/components/ui/Typography";
 
 const meta = {
   title: "Input",
@@ -40,14 +41,11 @@ export const WithLabel: Story = {
   ),
 };
 
-// TODO: Replace with Heading typography
 export const WithHelperText: Story = {
   render: () => (
     <div>
       <Input className="mb-2" id="email" placeholder="you@example.com" />
-      <p className="text-sm text-muted-foreground">
-        We&apos;ll never share your email.
-      </p>
+      <Caption>We&apos;ll never share your email.</Caption>
     </div>
   ),
 };
