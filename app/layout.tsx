@@ -1,15 +1,14 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Caveat, Inter } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+const inter = Inter({ subsets: ["latin"] });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+// Properly load the Caveat font
+const caveat = Caveat({
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-caveat",
 });
 
 export const metadata: Metadata = {
@@ -24,9 +23,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="light">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${inter.className} ${caveat.variable} antialiased`}>
         {children}
       </body>
     </html>
