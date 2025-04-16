@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Caveat, Inter } from "next/font/google";
 import "./globals.css";
+import Header from "@/components/Header";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,7 +24,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="light">
-      <body className={`${inter.className} ${caveat.variable} antialiased`}>
+      <body
+        className={`${inter.className} ${caveat.variable} antialiased flex min-h-screen flex-col`}
+      >
+        <Header />
         {children}
       </body>
     </html>
