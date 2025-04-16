@@ -9,7 +9,7 @@ import Link from "next/link";
 export function Footer() {
   return (
     <footer className="mt-auto border-t border-primary/10 bg-white/50 py-8">
-      <div className="max-w-[1400px] mx-auto px-8 w-full">
+      <div className="container">
         <div className="flex flex-col md:flex-row md:justify-between gap-8">
           {/* Left section - Navigation links */}
           <div className="space-y-4">
