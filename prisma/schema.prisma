@@ -1,0 +1,78 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id // This is Clerk's user ID
+  username  String   @unique
+  email     String   @unique
+  firstName String?
+  lastName  String?
+  image     String?
+  bio       String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relationships
+  followers Follow[] @relation("UserFollowers")
+  following Follow[] @relation("UserFollowing")
+
+  Recipe Recipe[]
+  Tag    Tag[]
+}
+
+model Follow {
+  id          String   @id @default(cuid())
+  followerId  String
+  followingId String
+  createdAt   DateTime @default(now())
+
+  follower  User @relation("UserFollowing", fields: [followerId], references: [id])
+  following User @relation("UserFollowers", fields: [followingId], references: [id])
+
+  @@unique([followerId, followingId])
+}
+
+model Recipe {
+  id        String   @id @default(cuid())
+  title     String
+  slug      String   @unique
+  totalTime Int // Total time in minutes
+  prepTime  Int? // Optional prep time in minutes
+  cookTime  Int? // Optional cook time in minutes
+  servings  String // e.g., "4 servings"
+  private   Boolean  @default(true) // Whether the recipe is private or public
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  ingredients Ingredient[]
+  tags        Tag[]        @relation("RecipeTags")
+
+  @@unique([userId, slug]) // Enforce uniqueness of slug for each user
+}
+
+model Ingredient {
+  id       String @id @default(cuid())
+  name     String
+  quantity String // e.g., "1 cup", "2 tbsp"
+  recipeId String
+  recipe   Recipe @relation(fields: [recipeId], references: [id])
+}
+
+model Tag {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  colorCode String // Hex color code for the tag
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  recipes   Recipe[] @relation("RecipeTags")
+}
