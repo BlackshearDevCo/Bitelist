@@ -4,6 +4,13 @@ import { Home } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
 import { Button } from "@/components/ui/Button";
 import { getHomeRoute } from "@/lib/routes";
+import {
+  SignInButton,
+  SignOutButton,
+  SignUpButton,
+  SignedIn,
+  SignedOut,
+} from "@clerk/nextjs";
 
 export default function Header() {
   return (
@@ -25,8 +32,21 @@ export default function Header() {
         </div>
 
         <div className="flex items-center gap-2">
-          <Button variant="secondary">Login</Button>
-          <Button>Sign Up</Button>
+          <SignedOut>
+            <SignInButton>
+              <Button variant="secondary">Login</Button>
+            </SignInButton>
+
+            <SignUpButton>
+              <Button>Sign Up</Button>
+            </SignUpButton>
+          </SignedOut>
+
+          <SignedIn>
+            <SignOutButton>
+              <Button variant="secondary">Log out</Button>
+            </SignOutButton>
+          </SignedIn>
         </div>
       </div>
     </header>
