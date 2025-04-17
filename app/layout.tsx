@@ -4,6 +4,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import "./globals.css";
 import Header from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { ThemeProvider } from "@/components/ThemeProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -37,15 +38,22 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-      <html lang="en" className="light">
+      <html lang="en" className="light" suppressHydrationWarning>
         <body
           className={`${inter.className} ${caveat.variable} antialiased flex min-h-screen flex-col`}
         >
-          <Header />
-          <main className="flex-1">
-            <div className="container">{children}</div>
-          </main>
-          <Footer />
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <Header />
+            <main className="flex-1">
+              <div className="container">{children}</div>
+            </main>
+            <Footer />
+          </ThemeProvider>
         </body>
       </html>
     </ClerkProvider>
