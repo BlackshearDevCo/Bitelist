@@ -6,11 +6,12 @@ import { Button } from "@/components/ui/Button";
 import { getHomeRoute } from "@/lib/routes";
 import {
   SignInButton,
-  SignOutButton,
+  // SignOutButton,
   SignUpButton,
   SignedIn,
   SignedOut,
 } from "@clerk/nextjs";
+import { UserDropdown } from "./UserDropdown";
 
 export default function Header() {
   return (
@@ -43,9 +44,7 @@ export default function Header() {
           </SignedOut>
 
           <SignedIn>
-            <SignOutButton>
-              <Button variant="secondary">Log out</Button>
-            </SignOutButton>
+            <UserDropdown />
           </SignedIn>
         </div>
       </div>

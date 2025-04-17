@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export function Footer() {
   return (
-    <footer className="mt-auto border-t border-primary/10 bg-white/50 py-6">
+    <footer className="mt-auto border-t border-primary/10 bg-background py-6">
       <div className="container">
         <section className="flex flex-col gap-4">
           <Link href={getHomeRoute()}>
